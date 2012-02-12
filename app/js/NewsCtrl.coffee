@@ -1,21 +1,35 @@
-NewsCtrl = ($updateView,createPostDAO)->
+NewsCtrl = ($updateView,createPostDAO,createFriendsPostsDAO)->
   self = this
-  log(@username)
   postDAO = createPostDAO(@username)
-  @posts = postDAO.readAll()
+  friendsPostsDAO = createFriendsPostsDAO(@username)
+  myPosts = postDAO.readAll()
+  @posts = []
+
   postDAO.setChangeListener (posts)->
-    self.posts = posts
-    $updateView()
+    myPosts = posts
+    update()
+
   @addPost = ->
     newPost = new Post(@text)
-    @posts.unshift(newPost)
+    myPosts.unshift(newPost)
     @text = ''
     @savePosts()
+
   @deletePost = (post)->
-    angular.Array.remove(@posts, post)
-    @avePosts()
+    angular.Array.remove(myPosts, post)
+    @savePosts()
+
   @savePosts = ->
-    postDAO.saveAll(@posts)
+    postDAO.saveAll(myPosts)
+
+  update = ->
+    friendsPosts = friendsPostsDAO.readAll()
+    self.posts = myPosts.concat(friendsPosts)
+    $updateView()
+
+  setInterval(update,1000)
+
+  update()
 
 
 this.NewsCtrl = NewsCtrl

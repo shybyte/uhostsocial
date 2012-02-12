@@ -15,6 +15,17 @@ class LocalhostDAO
   setChangeListener: (onChangeListener)->
     @onChangeListener = onChangeListener
 
+class FriendsPostsDAO
+  constructor: (@username) ->
+    friendsDAO = new LocalhostDAO(@username,'friends')
+    @friends = friendsDAO.readAll()
+  readAll: ->
+    allPosts = []
+    for friend in @friends
+      postDAO = new LocalhostDAO(friend.name,'posts')
+      allPosts = allPosts.concat(postDAO.readAll())
+    return allPosts
+
 
 angular.service('createPostDAO', ->
   return (username) ->
@@ -24,4 +35,9 @@ angular.service('createPostDAO', ->
 angular.service('createFriendsDAO', ->
   return (username) ->
     new LocalhostDAO(username,'friends')
+)
+
+angular.service('createFriendsPostsDAO', ->
+    return (username) ->
+      new FriendsPostsDAO(username)
 )

@@ -6,7 +6,7 @@
 </form>
 
 <ul>
-    <li ng:repeat="post in posts">
+    <li ng:repeat="post in posts.$orderBy('created',true)">
         {{post.content}} <button ng:click="deletePost(post)">Delete</button>
     </li>
 </ul>
