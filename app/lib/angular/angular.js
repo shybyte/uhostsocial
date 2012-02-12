@@ -7608,7 +7608,7 @@ angularServiceInject('$route', function(location, $updateView) {
          * @description
          * Register a handler function that will be called when route changes
          */
-        onChange: function(fn) {
+        onChangeListener: function(fn) {
           onChange.push(fn);
           return fn;
         },
@@ -11075,7 +11075,7 @@ angularWidget('ng:view', function(element) {
       var parentScope = this,
           childScope;
 
-      $route.onChange(function(){
+      $route.onChangeListener(function(){
         var src;
 
         if ($route.current) {

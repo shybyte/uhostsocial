@@ -1,0 +1,12 @@
+<h2>News</h2>
+
+<form ng:submit="addPost()">
+    <textarea rows="5" cols="70" name="text" placeholder="enter your post here" autofocus=""></textarea><br>
+    <input type="submit" value="Post">
+</form>
+
+<ul>
+    <li ng:repeat="post in posts">
+        {{post.content}} <button ng:click="deletePost(post)">Delete</button>
+    </li>
+</ul>
