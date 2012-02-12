@@ -5,8 +5,8 @@ describe('my app', function() {
   });
 
 
-  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
-    expect(browser().location().hash()).toBe("/view1");
+  it('should automatically redirect to /news when location hash/fragment is empty', function() {
+    expect(browser().location().hash()).toBe("/news");
   });
 
 

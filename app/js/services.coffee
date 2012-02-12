@@ -1,23 +1,27 @@
-class PostDAO
-  constructor: (@username)->
+class LocalhostDAO
+  constructor: (@username,@keyName)->
     self = this
-    @key = @username+'.posts'
-    log(@key)
+    @key = @username+'.'+@keyName
     @onChangeListener = ->
       #
     window.addEventListener('storage', (event) ->
         if event.key == self.key
           self.onChangeListener(JSON.parse(event.newValue))
     )
-  readPosts: ->
+  readAll: ->
     JSON.parse(localStorage[@key] ? "[]")
-  savePosts: (posts) ->
-    localStorage[@key] = JSON.stringify(posts)
+  saveAll: (items) ->
+    localStorage[@key] = JSON.stringify(items)
   setChangeListener: (onChangeListener)->
     @onChangeListener = onChangeListener
 
 
 angular.service('createPostDAO', ->
   return (username) ->
-    new PostDAO(username)
+    new LocalhostDAO(username,'posts')
+)
+
+angular.service('createFriendsDAO', ->
+  return (username) ->
+    new LocalhostDAO(username,'friends')
 )

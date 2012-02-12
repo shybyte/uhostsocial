@@ -1,5 +1,6 @@
 AppCtrl = ($route)->
   $route.when('/news', {template: 'partials/news.html', controller: NewsCtrl})
+  $route.when('/friends', {template: 'partials/friends.html', controller: FriendsCtrl})
   $route.when('/view1', {template: 'partials/partial1.html', controller: MyCtrl1})
   $route.when('/view2', {template: 'partials/partial2.html', controller: MyCtrl2})
   $route.otherwise({redirectTo: '/news'});

@@ -1,0 +1,12 @@
+<h2>Friends</h2>
+
+<form ng:submit="addFriend()">
+    <input name="name" type="text" placeholder="enter your friends name" autofocus="">
+    <input type="submit" value="Add">
+</form>
+
+<ul>
+    <li ng:repeat="friend in friends.$orderBy('name')">
+        {{friend.name}} <button ng:click="deleteFriend(friend)">Remove</button>
+    </li>
+</ul>

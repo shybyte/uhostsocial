@@ -2,7 +2,7 @@ NewsCtrl = ($updateView,createPostDAO)->
   self = this
   log(@username)
   postDAO = createPostDAO(@username)
-  @posts = postDAO.readPosts()
+  @posts = postDAO.readAll()
   postDAO.setChangeListener (posts)->
     self.posts = posts
     $updateView()
@@ -13,9 +13,9 @@ NewsCtrl = ($updateView,createPostDAO)->
     @savePosts()
   @deletePost = (post)->
     angular.Array.remove(@posts, post)
-    @savePosts()
+    @avePosts()
   @savePosts = ->
-    postDAO.savePosts(@posts)
+    postDAO.saveAll(@posts)
 
 
 this.NewsCtrl = NewsCtrl
